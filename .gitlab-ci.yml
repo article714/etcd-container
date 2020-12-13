@@ -1,0 +1,28 @@
+stages:
+  - build
+  - tests
+  - publish_images
+
+variables:
+  ETCD_CONTAINER_VERSION: '0.1.0'
+  ETCD_VERSION: 'v3.4.14'
+
+#-----------------------------------------
+build_image:
+  stage: build
+  tags:
+    - shell
+  variables:
+    BUILD_OPTS: '--force-rm --no-cache'
+  script:
+    - docker build ${BUILD_OPTS} -t article714/etcd-container:${ETCD_CONTAINER_VERSION}  --build-arg ETCD_CONTAINER_VERSION=${ETCD_CONTAINER_VERSION} ETCD_VERSION=${ETCD_VERSION} .
+
+test_image:
+  stage: tests
+  tags:
+    - docker
+  image:
+    - article714/etcd-container:${ETCD_CONTAINER_VERSION}
+  scripts:
+    - /usr/bin/etcd --version
+    - /usr/bin/etcdctl version
