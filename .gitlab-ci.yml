@@ -21,8 +21,7 @@ test_image:
   stage: tests
   tags:
     - docker
-  image:
-    - article714/etcd-container:${ETCD_CONTAINER_VERSION}
-  scripts:
+  image: article714/etcd-container:${ETCD_CONTAINER_VERSION}
+  script:
     - /usr/bin/etcd --version
     - /usr/bin/etcdctl version
