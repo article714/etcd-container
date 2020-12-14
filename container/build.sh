@@ -17,6 +17,18 @@ apt-get upgrade -yq
 # install etcd
 ETCD_VER=v3.4.14
 
+# etcd user should have a > 1000 gid to ease uid/gid mapping in docker
+addgroup --gid 1020 etcd
+
+adduser --system --home /var/lib/etcd --gid 1020 --uid 1020 --quiet etcd
+adduser odoo syslog
+
+mkdir -p /home/etcd
+mkdir -p /container/data
+chown -R etcd. /home/etcd
+chmod -R 770 /home/etcd
+chmod -R 770 /container/data
+
 # choose either URL
 GOOGLE_URL=https://storage.googleapis.com/etcd
 GITHUB_URL=https://github.com/etcd-io/etcd/releases/download
