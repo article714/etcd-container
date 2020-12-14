@@ -25,6 +25,9 @@ test_image:
   script:
     - /usr/bin/etcd --version
     - /usr/bin/etcdctl version
+    - runsvdir -P /container/services
+    - sv status etcd
+    - /usr/bin/etcdctl endpoint status --endpoints=[127.0.0.1:2379]
 
 publish_image:
   stage: publish_images
