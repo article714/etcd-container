@@ -15,7 +15,7 @@ build_image:
   variables:
     BUILD_OPTS: '--network=internal_bridge --force-rm --no-cache'
   script:
-    - docker build ${BUILD_OPTS} -t article714/etcd-container:${ETCD_CONTAINER_VERSION}  --build-arg ETCD_CONTAINER_VERSION=${ETCD_CONTAINER_VERSION}  --build-arg ETCD_VERSION=${ETCD_VERSION} .
+    - docker build ${BUILD_OPTS} -t article714/etcd-container:${ETCD_CONTAINER_VERSION} -t article714/etcd-container:latest   --build-arg ETCD_CONTAINER_VERSION=${ETCD_CONTAINER_VERSION}  --build-arg ETCD_VERSION=${ETCD_VERSION} .
 
 test_image:
   stage: tests
@@ -25,3 +25,14 @@ test_image:
   script:
     - /usr/bin/etcd --version
     - /usr/bin/etcdctl version
+
+publish_image:
+  stage: publish_images
+  tags:
+    - shell
+  only:
+    refs:
+      - production
+  script:
+    - docker push article714/etcd-container:${ETCD_CONTAINER_VERSION}
+    - docker push article714/etcd-container:latest
