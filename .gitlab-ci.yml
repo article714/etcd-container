@@ -30,7 +30,16 @@ test_image:
     - runsvdir -P ${SVDIR} &
     - sleep 2
     - sv status etcd
-    - /usr/bin/etcdctl endpoint status --endpoints=127.0.0.1:2379
+    - /usr/bin/etcdctl endpoint status --endpoints=127.0.0.1:2379  
+  after_script:
+    - mkdir -p logs
+    - cp -rf /var/log/* logs
+  artifacts:
+    paths:
+      - logs/*
+    expire_in: 2 days
+    when: always
+
 
 publish_image:
   stage: publish_images
