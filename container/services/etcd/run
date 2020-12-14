@@ -4,4 +4,4 @@ exec 2>&1
 CONFIG="/container/config/etcd/etcd.yml"
 EXTRAOPTS=""
 
-exec chpst -u etcd /usr/bin/etcd --config $CONFIG $EXTRAOPTS
+exec chpst -u etcd /usr/bin/etcd --config-file $CONFIG $EXTRAOPTS
