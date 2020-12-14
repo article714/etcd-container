@@ -30,7 +30,7 @@ test_image:
     - runsvdir -P ${SVDIR} &
     - sleep 2
     - sv status etcd
-    - /usr/bin/etcdctl endpoint status --endpoints=[127.0.0.1:2379]
+    - /usr/bin/etcdctl endpoint status --endpoints=127.0.0.1:2379
 
 publish_image:
   stage: publish_images
