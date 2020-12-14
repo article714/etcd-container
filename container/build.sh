@@ -26,6 +26,7 @@ adduser etcd syslog
 mkdir -p /home/etcd
 mkdir -p /container/data
 chown -R etcd. /home/etcd
+chown -R etcd. /container/data
 chmod -R 770 /home/etcd
 chmod -R 770 /container/data
 
