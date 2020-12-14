@@ -22,10 +22,12 @@ test_image:
   tags:
     - docker
   image: article714/etcd-container:${ETCD_CONTAINER_VERSION}
+  variables:
+    SVDIR: /container/services
   script:
     - /usr/bin/etcd --version
     - /usr/bin/etcdctl version
-    - runsvdir -P /container/services &
+    - runsvdir -P ${SVDIR} &
     - sv status etcd
     - /usr/bin/etcdctl endpoint status --endpoints=[127.0.0.1:2379]
 
