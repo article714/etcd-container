@@ -4,7 +4,7 @@ stages:
   - publish_images
 
 variables:
-  ETCD_CONTAINER_VERSION: '0.1.0'
+  ETCD_CONTAINER_VERSION: '0.2.0'
   ETCD_VERSION: 'v3.4.14'
 
 #-----------------------------------------
@@ -30,7 +30,7 @@ test_image:
     - runsvdir -P ${SVDIR} &
     - sleep 2
     - sv status etcd
-    - /usr/bin/etcdctl endpoint status --endpoints=127.0.0.1:2379  
+    - /usr/bin/etcdctl endpoint status --endpoints=127.0.0.1:2379
   after_script:
     - mkdir -p logs
     - cp -rf /var/log/* logs
@@ -39,7 +39,6 @@ test_image:
       - logs/*
     expire_in: 2 days
     when: always
-
 
 publish_image:
   stage: publish_images

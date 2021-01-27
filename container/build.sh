@@ -10,7 +10,7 @@ localedef -i fr_FR -c -f UTF-8 -A /usr/share/locale/locale.alias fr_FR.UTF-8
 export LANG=en_US.utf8
 
 # Install basic needed packages
-LC_ALL=C DEBIAN_FRONTEND=noninteractive apt-get install -qy --no-install-recommends wget curl gnupg ca-certificates runit rsyslog logrotate
+LC_ALL=C DEBIAN_FRONTEND=noninteractive apt-get install -qy --no-install-recommends wget curl gnupg ca-certificates runit rsyslog logrotate python3
 
 apt-get upgrade -yq
 
